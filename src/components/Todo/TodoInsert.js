@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MdAddCircle } from 'react-icons/md';
 
-const TodoInsert = ({
-  onInsertToggle,
-  onInsertTodo,
-  selectedTodo,
-  onUpdate,
-}) => {
+const TodoInsert = ({ onInsertToggle, onInsertTodo, selectedTodo, onUpdate }) => {
   const [newTodo, setNewTodo] = useState('');
 
   const onChange = e => {

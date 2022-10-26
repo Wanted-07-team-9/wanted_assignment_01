@@ -14,22 +14,10 @@ const App = () => {
     <>
       <Heading />
       <Routes>
-        <Route
-          path="/"
-          element={login ? <Navigate to="/todo" /> : <HomePage />}
-        />
-        <Route
-          path="/todo"
-          element={login ? <TodoListPage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signin"
-          element={login ? <Navigate to="/todo" /> : <SignIn />}
-        />
-        <Route
-          path="/signup"
-          element={login ? <Navigate to="/todo" /> : <SignUp />}
-        />
+        <Route path="/" element={login ? <Navigate to="/todo" /> : <HomePage />} />
+        <Route path="/todo" element={login ? <TodoListPage /> : <Navigate to="/" />} />
+        <Route path="/signin" element={login ? <Navigate to="/todo" /> : <SignIn />} />
+        <Route path="/signup" element={login ? <Navigate to="/todo" /> : <SignUp />} />
       </Routes>
       <Footer />
     </>

@@ -41,9 +41,7 @@ const SignIn = () => {
 
   return (
     <div style={{ height: '80vh' }}>
-      <h2 style={{ textAlign: 'center', marginTop: '50px', color: '#555' }}>
-        로그인
-      </h2>
+      <h2 style={{ textAlign: 'center', marginTop: '50px', color: '#555' }}>로그인</h2>
       <SignInLayout>
         <form onSubmit={onSubmit} onChange={onChange}>
           <label>

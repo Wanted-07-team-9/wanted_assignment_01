@@ -36,22 +36,17 @@ function TodoListPage() {
 
   const onCheckToggle = id => {
     setTodoList(todos =>
-      todos.map(todo =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
+      todos.map(todo => (todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo))
     );
   };
 
   useEffect(() => {
     const getTodos = async () => {
-      const res = await axios.get(
-        'https://pre-onboarding-selection-task.shop/todos',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.get('https://pre-onboarding-selection-task.shop/todos', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = res.data;
       setTodoList(data);
     };
@@ -77,15 +72,11 @@ function TodoListPage() {
       isCompleted,
     };
     const todoUpdate = async () => {
-      await axios.put(
-        `https://pre-onboarding-selection-task.shop/todos/${id}`,
-        body,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.put(`https://pre-onboarding-selection-task.shop/todos/${id}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     };
     todoUpdate();
   };

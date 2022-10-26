@@ -46,7 +46,7 @@ function SignUp() {
 
   useEffect(() => {
     Check();
-  },[]);
+  }, []);
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -54,54 +54,36 @@ function SignUp() {
       email,
       password,
     };
-    axios
-      .post('https://pre-onboarding-selection-task.shop/auth/signup', body)
-      .then(res => {
-        if (res.status === 201) {
-          alert('회원이 되신것을 축하합니다. 로그인 페이지로 이동합니다');
-          navigate('/signin');
-        } else {
-          alert('회원가입을 다시 진행해 주세요.');
-        }
-      });
+    axios.post('https://pre-onboarding-selection-task.shop/auth/signup', body).then(res => {
+      if (res.status === 201) {
+        alert('회원이 되신것을 축하합니다. 로그인 페이지로 이동합니다');
+        navigate('/signin');
+      } else {
+        alert('회원가입을 다시 진행해 주세요.');
+      }
+    });
   };
 
   return (
     <div style={{ height: '80vh' }}>
-      <h2 style={{ textAlign: 'center', marginTop: '50px', color: '#555' }}>
-        회원가입
-      </h2>
+      <h2 style={{ textAlign: 'center', marginTop: '50px', color: '#555' }}>회원가입</h2>
       <SignUpLayout>
         <form onSubmit={onSubmit}>
-          <span
-            style={{ color: '#D1AFE1', textAlign: 'center', fontWeight: '800' }}
-          >
+          <span style={{ color: '#D1AFE1', textAlign: 'center', fontWeight: '800' }}>
             {errMessage}
           </span>
           <label>
             이메일
-            <span style={{ fontSize: '10px' }}>
-              (@포함된 mail 형식으로 적어주세요)
-            </span>
+            <span style={{ fontSize: '10px' }}>(@포함된 mail 형식으로 적어주세요)</span>
             <input type="email" name="email" onChange={emailOnChange} />
           </label>
 
           <label>
             패스워드
-            <span style={{ fontSize: '10px' }}>
-              (8개 이상의 패스워드를 적어주세요)
-            </span>
-            <input
-              type="password"
-              name="password"
-              onChange={passwordOnChange}
-            />
+            <span style={{ fontSize: '10px' }}>(8개 이상의 패스워드를 적어주세요)</span>
+            <input type="password" name="password" onChange={passwordOnChange} />
           </label>
-          <button
-            type="submit"
-            disabled={!check}
-            style={{ opacity: `${opacity}` }}
-          >
+          <button type="submit" disabled={!check} style={{ opacity: `${opacity}` }}>
             회원가입
           </button>
         </form>
