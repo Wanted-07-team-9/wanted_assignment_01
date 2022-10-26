@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { signUp } from '../../utils/auth';
+import { emailCheck, passwordCheck } from '../../utils/auth';
 import styled from 'styled-components';
 
 function SignUp() {
@@ -9,28 +10,23 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [check, setCheck] = useState(false);
   const [errMessage, setErrMessage] = useState('');
-  const [opacity, setOpacity] = useState(0.5);
 
   const Check = () => {
     if (email === '' || password === '') {
       setErrMessage('양식을 모두 입력해주세요');
-      setOpacity(0.5);
       return setCheck(false);
     }
 
-    if (!email.includes('@')) {
+    if (!emailCheck(email)) {
       setErrMessage('이메일 형식을 맞춰 주세요');
-      setOpacity(0.5);
       return setCheck(false);
     }
 
-    if (password.length < 8) {
-      setErrMessage('비밀번호는 문자와 숫자 상관 없이 8자 이상 입니다.');
-      setOpacity(0.5);
+    if (!passwordCheck(password)) {
+      setErrMessage('비밀번호는 8자 이상 입니다.');
       return setCheck(false);
     }
     setErrMessage('');
-    setOpacity(1);
     return setCheck(true);
   };
 
@@ -43,26 +39,23 @@ function SignUp() {
     e.preventDefault();
     setPassword(e.target.value);
   };
-
-  useEffect(() => {
-    Check();
-  }, []);
-
   const onSubmit = async e => {
     e.preventDefault();
     const body = {
       email,
       password,
     };
-    axios.post('https://pre-onboarding-selection-task.shop/auth/signup', body).then(res => {
+    await signUp(body).then(res => {
       if (res.status === 201) {
         alert('회원이 되신것을 축하합니다. 로그인 페이지로 이동합니다');
         navigate('/signin');
-      } else {
-        alert('회원가입을 다시 진행해 주세요.');
       }
     });
   };
+
+  useEffect(() => {
+    Check();
+  }, [email, password]);
 
   return (
     <div style={{ height: '80vh' }}>
@@ -74,18 +67,30 @@ function SignUp() {
           </span>
           <label>
             이메일
-            <span style={{ fontSize: '10px' }}>(@포함된 mail 형식으로 적어주세요)</span>
-            <input type="email" name="email" onChange={emailOnChange} />
+            <input
+              type="email"
+              name="email"
+              onChange={emailOnChange}
+              placeholder={'@포함된 mail 형식으로 적어주세요'}
+            />
           </label>
 
           <label>
             패스워드
-            <span style={{ fontSize: '10px' }}>(8개 이상의 패스워드를 적어주세요)</span>
-            <input type="password" name="password" onChange={passwordOnChange} />
+            <input
+              type="password"
+              name="password"
+              onChange={passwordOnChange}
+              placeholder={'8개 이상의 패스워드를 적어주세요'}
+            />
           </label>
-          <button type="submit" disabled={!check} style={{ opacity: `${opacity}` }}>
-            회원가입
-          </button>
+          {check ? (
+            <button type="submit">회원가입</button>
+          ) : (
+            <button type="button" style={{ backgroundColor: 'grey' }}>
+              회원가입
+            </button>
+          )}
         </form>
       </SignUpLayout>
     </div>
@@ -116,6 +121,7 @@ const SignUpLayout = styled.div`
       border: none;
       box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
       background: #f67280;
+      color: #fff;
     }
   }
 `;
