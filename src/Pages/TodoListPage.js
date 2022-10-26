@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Template from '../components/Todo/Template';
 import TodoList from '../components/Todo/TodoList';
 import TodoInsert from '../components/Todo/TodoInsert';
-import axios from 'axios';
+import { getTodoList, createTodo, updateTodo, deleteTodo } from '../utils/todo';
 import { MdAddCircle } from 'react-icons/md';
 import styled from 'styled-components';
 
@@ -10,6 +10,7 @@ function TodoListPage() {
   const [insertToggle, setInsertToggle] = useState(false);
   const [todoList, setTodoList] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState(null);
+
   const token = localStorage.getItem('accessToken');
 
   const onInsertToggle = () => {
@@ -23,14 +24,7 @@ function TodoListPage() {
     if (text === '') {
       return alert('할일을 입력해 주세요');
     } else {
-      const body = {
-        todo: text,
-      };
-      axios.post('https://pre-onboarding-selection-task.shop/todos', body, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      createTodo(text);
     }
   };
 
@@ -39,17 +33,12 @@ function TodoListPage() {
       todos.map(todo => (todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo))
     );
   };
+  const getTodos = async () => {
+    const todoData = await getTodoList();
+    setTodoList(todoData.data);
+  };
 
   useEffect(() => {
-    const getTodos = async () => {
-      const res = await axios.get('https://pre-onboarding-selection-task.shop/todos', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = res.data;
-      setTodoList(data);
-    };
     getTodos();
   }, [todoList, token]);
 
@@ -58,27 +47,12 @@ function TodoListPage() {
   };
   const onRemove = id => {
     if (window.confirm('정말로 삭제 하시겠습니까?')) {
-      axios.delete(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      deleteTodo(id);
     }
   };
   const onUpdate = (id, todo, isCompleted) => {
     // console.log(id, todo, isCompleted);
-    const body = {
-      todo,
-      isCompleted,
-    };
-    const todoUpdate = async () => {
-      await axios.put(`https://pre-onboarding-selection-task.shop/todos/${id}`, body, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    };
-    todoUpdate();
+    updateTodo(id, todo, isCompleted);
   };
 
   return (

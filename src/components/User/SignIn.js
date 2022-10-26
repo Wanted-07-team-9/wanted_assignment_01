@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import { signIn } from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -23,20 +24,18 @@ const SignIn = () => {
   };
   const onSubmit = async e => {
     e.preventDefault();
-    await axios
-      .post('https://pre-onboarding-selection-task.shop/auth/signin', userInfo)
-      .then(res => {
-        const accessToken = res.data.access_token;
-        localStorage.setItem('accessToken', accessToken);
-        const loginStatus = true;
-        localStorage.setItem('loginStatus', loginStatus);
-        if (localStorage.accessToken) {
-          navigate('/todo');
-          Refresh();
-        } else {
-          alert('로그인 정보를 확인하세요');
-        }
-      });
+    await signIn(userInfo).then(res => {
+      const accessToken = res.data.access_token;
+      localStorage.setItem('accessToken', accessToken);
+      const loginStatus = true;
+      localStorage.setItem('loginStatus', loginStatus);
+      if (localStorage.accessToken) {
+        navigate('/todo');
+        Refresh();
+      } else {
+        alert('로그인 정보를 확인하세요');
+      }
+    });
   };
 
   return (
