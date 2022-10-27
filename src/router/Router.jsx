@@ -9,10 +9,10 @@ const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route element={<Layout />}>
-          <Route path="/todo" element={<Todo />} />
-          <Route path="*" element={<NotFound />} />
+        <Route path="/" element={withAuthGuard('guest', <Main />)} />
+        <Route element={withAuthGuard('member', <Layout />)}>
+          <Route path="/todo" element={withAuthGuard('member', <Todo />)} />
+          <Route path="*" element={withAuthGuard('member', <NotFound />)} />
         </Route>
       </Routes>
     </BrowserRouter>
