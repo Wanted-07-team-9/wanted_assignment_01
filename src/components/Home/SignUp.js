@@ -49,7 +49,10 @@ const SignUp = ({isSignInMode, handleChangeMode, hadleModalOpen}) => {
     event.preventDefault()
     const email = emailInputRef.current.value;
     const password = pwdInputRef.current.value
-    signUp(email, password,handleChangeMode, hadleModalOpen)
+    if(emailValid  && passwordValid && rePasswordValid){
+      signUp(email, password,handleChangeMode, hadleModalOpen)
+    }
+    return
   }
   useEffect(() => {
     if (emailValid && passwordValid && rePasswordValid) {
