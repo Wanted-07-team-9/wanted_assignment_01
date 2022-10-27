@@ -3,6 +3,6 @@ export const validCheck = (type, value) => {
   return pattern.test(value);
 };
 
-export const validEmptyCheck = (value) => {
-  return !value.replace(/ /g, "").length >= 1;
-}
+export const validEmptyCheck = value => {
+  return !value.replace(/ /g, '').length >= 1;
+};

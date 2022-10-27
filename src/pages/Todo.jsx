@@ -42,24 +42,23 @@ const TodoPage = () => {
   const createTodo = async e => {
     e.preventDefault();
     const isEmpty = validEmptyCheck(newTodo);
-    if(!isEmpty) {
+    if (!isEmpty) {
       try {
-        const response = await reqTodo.createTodo({atodo: newTodo});
-        if(response.status === 201) {
-          alert("Todo가 추가되었습니다.");
+        const response = await reqTodo.createTodo({ atodo: newTodo });
+        if (response.status === 201) {
+          alert('Todo가 추가되었습니다.');
           setTodoList(prev => [response.data, ...prev]);
-          setNewTodo("");
+          setNewTodo('');
         }
       } catch (error) {
         if (error.response.status === 400) {
           alert('Todo 추가를 실패했습니다.\n다시 확인해주세요.');
         }
       }
-      setErrorMsg("");
+      setErrorMsg('');
     } else {
-      setErrorMsg("내용을 확인해주세요.");
+      setErrorMsg('내용을 확인해주세요.');
     }
-
   };
 
   const todoChange = e => {
