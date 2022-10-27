@@ -11,23 +11,25 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [check, setCheck] = useState(false);
   const [errMessage, setErrMessage] = useState('');
+  const [errEmailMsg, setErrEmailMsg] = useState('');
+  const [errPasswordMsg, setErrPasswordMsg] = useState('');
 
   const Check = () => {
-    if (email === '' || password === '') {
+    if (email === '' && password === '') {
       setErrMessage('양식을 모두 입력해주세요');
       return setCheck(false);
     }
 
     if (!emailCheck(email)) {
-      setErrMessage('이메일 형식을 맞춰 주세요');
+      setErrEmailMsg('이메일 형식을 맞춰 주세요');
       return setCheck(false);
-    }
-
-    if (!passwordCheck(password)) {
-      setErrMessage('비밀번호는 8자 이상 입니다.');
+    } else if (!passwordCheck(password)) {
+      setErrPasswordMsg('비밀번호는 8자 이상 입니다.');
       return setCheck(false);
     }
     setErrMessage('');
+    setErrPasswordMsg('');
+    setErrEmailMsg('');
     return setCheck(true);
   };
 
@@ -75,7 +77,7 @@ function SignUp() {
               placeholder={'@포함된 mail 형식으로 적어주세요'}
             />
           </label>
-
+          <span style={{ color: '#D1AFE1' }}>{errEmailMsg} </span>
           <label>
             패스워드
             <input
@@ -85,6 +87,8 @@ function SignUp() {
               placeholder={'8개 이상의 패스워드를 적어주세요'}
             />
           </label>
+          <span style={{ color: '#D1AFE1' }}>{errPasswordMsg}</span>
+
           {check ? (
             <button type="submit">회원가입</button>
           ) : (
