@@ -33,19 +33,21 @@ const AuthForm = ({ formType, onSubmit, authInfo, setAuthInfo }) => {
       if (name === 'email') msg = '잘못된 이메일 형식입니다.';
       else if (name === 'password' || name === 'passwordCheck') msg = '8자리 이상 입력해주세요.';
     }
-    setAuthInfo((prevState) => ({
+    setAuthInfo(prevState => ({
       ...prevState,
       [name]: value,
       msg: {
         ...prevState.msg,
-        [name]: msg
-      }
+        [name]: msg,
+      },
     }));
   };
 
   useEffect(() => {
-    const isMsg = !Object.values(authInfo.msg).map(msg => msg === "").includes(false);
-    const isValue = !Object.values(authInfo).some(val => val === "");
+    const isMsg = !Object.values(authInfo.msg)
+      .map(msg => msg === '')
+      .includes(false);
+    const isValue = !Object.values(authInfo).some(val => val === '');
     // value가 모두 있거나 msg가 모두 비워져있을때 true
     setIsValid(isMsg && isValue);
   }, [authInfo]);

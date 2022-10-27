@@ -1,22 +1,23 @@
 import { instance } from '../utils/axios';
 import { getStorageItem } from '../utils/localStorage';
 
+const config = () => {
+  const token = getStorageItem('access_token');
+  return { headers: { Authorization: `Bearer ${token}` } };
+};
+
 export const reqTodo = {
   createTodo: body => {
-    return instance.get('/todos');
+    return instance.post('/todos', body, config());
   },
   getTodos: () => {
-    const token = getStorageItem('access_token');
-    return instance.get('/todos', { headers: { Authorization: `Bearer ${token}` } });
+    return instance.get('/todos', config());
   },
   updateTodo: (id, body) => {
-    // /todos/:id
-    // PUT
-    // status: 200 OK
+    return instance.put(`/todos/${id}`, body, config());
   },
   deleteTodo: id => {
-    // /todos/:id
-    // DELETE
+    return instance.delete(`/todos/${id}`, config());
     // status: 204 No Content
   },
 };

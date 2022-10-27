@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { reqTodo } from "../api/todo";
-import Pagination from "../components/Pagination";
-import TodoItem from "../components/TodoItem";
-import TodoItemEdit from "../components/TodoItemEdit";
-import { TodoDiv, TodoTable, TodoWrap } from "../styles/todo";
-import { removeStorageItem } from "../utils/localStorage";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { reqTodo } from '../api/todo';
+import Pagination from '../components/Pagination';
+import TodoItem from '../components/TodoItem';
+import TodoItemEdit from '../components/TodoItemEdit';
+import { TodoDiv, TodoForm, TodoTable, TodoWrap } from '../styles/todo';
+import { removeStorageItem } from '../utils/localStorage';
+import { validEmptyCheck } from '../utils/validCheck';
 
 const TodoPage = () => {
   const navigate = useNavigate();
 
   const [todoList, setTodoList] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [editTodoList, setEditTodoList] = useState([]);
 
   // Todo Table Pagination 옵션
@@ -22,13 +24,12 @@ const TodoPage = () => {
   const getTodos = async () => {
     try {
       const response = await reqTodo.getTodos();
-      if(response.status === 200) {
-        setTodoList(response.data);
+      if (response.status === 200) {
+        setTodoList(response.data.reverse());
       }
-    }
-    catch(error) {
-      if(error.response.status === 401) {
-        alert("인증된 사용자가 아닙니다.");
+    } catch (error) {
+      if (error.response.status === 401) {
+        alert('인증된 사용자가 아닙니다.');
         signOut();
       }
     }
@@ -38,50 +39,58 @@ const TodoPage = () => {
     getTodos();
   }, []);
 
-
-  const createTodo = async (e) => {
+  const createTodo = async e => {
     e.preventDefault();
-
-    try {
-      // const response = await reqTodo.createTodo();
-      // if(response.status === 200) {
-      //   setTodoList(response.data);
-      // }
-    }
-    catch(error) {
-      if(error.response.status === 401) {
-        alert("인증된 사용자가 아닙니다.");
-        signOut();
+    const isEmpty = validEmptyCheck(newTodo);
+    if(!isEmpty) {
+      try {
+        const response = await reqTodo.createTodo({atodo: newTodo});
+        if(response.status === 201) {
+          alert("Todo가 추가되었습니다.");
+          setTodoList(prev => [response.data, ...prev]);
+          setNewTodo("");
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          alert('Todo 추가를 실패했습니다.\n다시 확인해주세요.');
+        }
       }
+      setErrorMsg("");
+    } else {
+      setErrorMsg("내용을 확인해주세요.");
     }
+
   };
 
-  const todoChange = (e) => {
+  const todoChange = e => {
     const { value } = e.target;
     setNewTodo(value);
-    // if(name === "todo") {
-    //   setNewTodo(value);
-    // } else {
-    //   const editId = Number(name.replace('todo', ''));
-    //   setTodoList(prev => prev.map((obj) => obj.id === editId ? { ...obj, todo: value } : {...obj})); 
-    // }
-  }
+  };
 
   const signOut = () => {
-    removeStorageItem("access_token");
-    navigate("/");
-  }
-  
+    removeStorageItem('access_token');
+    navigate('/');
+  };
+
   return (
     <TodoWrap>
       <header>
         <h1>Todo List</h1>
         <button onClick={signOut}>로그아웃</button>
       </header>
-      <form onSubmit={createTodo}>
-        <input type="text" name="todo" value={newTodo} onChange={todoChange} placeholder="todo 적기" />
-        <button type="submit">추가</button>
-      </form>
+      <TodoForm onSubmit={createTodo}>
+        <div>
+          <input
+            type="text"
+            name="todo"
+            value={newTodo}
+            onChange={todoChange}
+            placeholder="todo 적기"
+          />
+          <button type="submit">추가</button>
+        </div>
+        <p>{errorMsg}</p>
+      </TodoForm>
       <TodoDiv>
         <TodoTable>
           <ul className="subject">
@@ -91,24 +100,24 @@ const TodoPage = () => {
             <li>수정</li>
             <li>삭제</li>
           </ul>
-          {todoList.slice(offset, offset + limit).map(
-            (todo, index) => {
-              const isEdit = editTodoList.includes(todo.id);
-              return isEdit ? (
-                <TodoItemEdit
-                  key={index}
-                  todo={todo}
-                  setEditTodoList={setEditTodoList}
-                />
-              ) : (
-                <TodoItem
-                  key={index}
-                  todo={todo}
-                  setEditTodoList={setEditTodoList}
-                />
-              );
-            }
-          )}
+          {todoList.slice(offset, offset + limit).map((todo, index) => {
+            const isEdit = editTodoList.includes(todo.id);
+            return isEdit ? (
+              <TodoItemEdit
+                key={index}
+                todo={todo}
+                setTodoList={setTodoList}
+                setEditTodoList={setEditTodoList}
+              />
+            ) : (
+              <TodoItem
+                key={index}
+                todo={todo}
+                setTodoList={setTodoList}
+                setEditTodoList={setEditTodoList}
+              />
+            );
+          })}
         </TodoTable>
       </TodoDiv>
       <footer>

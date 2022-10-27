@@ -12,23 +12,18 @@ export const TodoWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     button {
       position: absolute;
       right: 0;
     }
   }
-  header, footer {
+  header,
+  footer {
     margin: 1rem 0;
-  }
-  form {
-    width: 40%;
-    text-align: center;
-    margin-bottom: 1rem;
   }
   input {
     padding: 6px;
-    width: 50%;
     border: 1px solid #aaa;
     border-radius: 3px;
     background: #fff;
@@ -45,9 +40,25 @@ export const TodoWrap = styled.div`
     button {
       border-width: 1px;
     }
-    button[aria-current="page"] {
+    button[aria-current='page'] {
       background: #69d2e7;
     }
+  }
+`;
+
+export const TodoForm = styled.form`
+  width: 40%;
+  height: 60px;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    padding-top: 0.5em;
+    text-align: center;
+    font-size: 0.7em;
+    color: #ff0000;
   }
 `;
 

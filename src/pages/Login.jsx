@@ -8,12 +8,12 @@ import { setStorageItem } from '../utils/localStorage';
 const LoginPage = () => {
   const navigate = useNavigate();
   const [authInfo, setAuthInfo] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     msg: {
-      email: "",
-      password: ""
-    }
+      email: '',
+      password: '',
+    },
   });
 
   const loginSubmit = async e => {
@@ -21,18 +21,18 @@ const LoginPage = () => {
     try {
       const response = await reqAuth.signIn({
         email: authInfo.email,
-        password: authInfo.password
+        password: authInfo.password,
       });
 
-      if(response.status === 200) {
+      if (response.status === 200) {
         // 로그인 성공
-        setStorageItem("access_token", response.data.access_token);
+        setStorageItem('access_token', response.data.access_token);
         navigate('/todo');
       }
-    }
-    catch(error) {
-      if(error.response.status === 401) 
-        alert("이메일 또는 비밀번호가 틀렸습니다.");
+    } catch (error) {
+      const statusCode = error.response.status;
+      if (statusCode === 401) alert('이메일 또는 비밀번호가 틀렸습니다.');
+      else if (statusCode === 404) alert('해당 사용자가 존재하지 않습니다.');
     }
   };
 

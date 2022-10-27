@@ -6,5 +6,5 @@ export const reqAuth = {
   },
   signIn: body => {
     return instance.post('/auth/signin', body);
-  }
+  },
 };
