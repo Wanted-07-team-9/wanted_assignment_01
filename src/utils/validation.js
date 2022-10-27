@@ -9,3 +9,8 @@ export const validatePswReg = password => {
   const passwordValidation = rPassword.test(password);
   return passwordValidation;
 };
+
+export const validateTodoReg = todo => {
+  const todoValidation = todo.replace(/ /g, '').length >= 3;
+  return todoValidation;
+};
