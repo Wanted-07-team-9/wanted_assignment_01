@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getJwtToken } from '../utils/jwt';
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_HTTPS_URI,
@@ -9,7 +10,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    const auth = localStorage.getItem('access_token');
+    const auth = getJwtToken('access_token');
     if (auth) config.headers.common['Authorization'] = `Bearer ${auth}`;
     return config;
   },

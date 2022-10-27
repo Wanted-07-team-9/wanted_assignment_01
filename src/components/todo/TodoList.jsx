@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 import styled from 'styled-components';
 import { apis } from '../../api/api';
+import { getJwtToken } from '../../utils/jwt';
 import Todo from './Todo';
 
 const TodoList = ({ setTodoList, todoList }) => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = getJwtToken('access_token');
   useEffect(() => {
     if (accessToken) {
       apis.get_todos().then(({ data }) => {

@@ -6,6 +6,7 @@ import Label from '../elements/Label';
 import { emailCheck, passwordCheck } from '../../utils/regex';
 import { apis } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { getJwtToken, setJwtToken } from '../../utils/jwt';
 
 const SignIn = ({ setIsToggled }) => {
   const navigate = useNavigate();
@@ -61,13 +62,13 @@ const SignIn = ({ setIsToggled }) => {
       alert('아이디나 비밀번호 형식이 틀렸습니다.');
     } else {
       apis.sign_in(formData).then(({ data }) => {
-        localStorage.setItem('access_token', data.access_token);
+        setJwtToken('access_token', data.access_token);
         navigate('/todo');
       });
     }
   };
 
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = getJwtToken('access_token');
   useEffect(() => {
     if (accessToken) {
       navigate('/todo');
