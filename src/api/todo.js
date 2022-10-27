@@ -4,6 +4,7 @@ export const getTodoList = async () => {
   const instanceGet = await instance.get('/todos');
   return instanceGet;
 };
+
 export const createTodo = todo => {
   return instance.post('/todos', { todo });
 };
