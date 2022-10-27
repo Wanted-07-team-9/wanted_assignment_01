@@ -13,3 +13,11 @@ export const passwordCheck = password => {
 
   return password.trim() !== '' && password !== 'undefined' && regExp.test(password);
 };
+
+// todo 정규식 검사
+// 1자리 이상이면 true
+export const todoCheck = todo => {
+  let regExp = /.{1,}/;
+
+  return todo.trim() !== '' && todo !== 'undefined' && regExp.test(todo);
+};
