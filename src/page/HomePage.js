@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import HomeContainer from '../components/Home/HomeContainer'
+import Layout from '../components/Layout'
 import ModalAlert from '../components/ModalAlert'
 import SignIn from '../components/Home/SignIn'
 import SignUp from '../components/Home/SignUp'
@@ -27,14 +27,14 @@ const HomePage = () => {
   }
 
   return (
-    <HomeContainer>
+    <Layout>
         {isSignInMode === '로그인' ? (
           <SignIn isSignInMode={isSignInMode} handleChangeMode={handleChangeMode} hadleModalOpen={hadleModalOpen} />
         ) : (
           <SignUp isSignInMode={isSignInMode} handleChangeMode={handleChangeMode}  hadleModalOpen={hadleModalOpen} />
         )}
       {isModalOpen ? <ModalAlert rightBtnClick={handleModalClose} rightBtnMessage='확인'>{modalMessage}</ModalAlert> : <></>}
-    </HomeContainer>
+    </Layout>
   )
 }
 

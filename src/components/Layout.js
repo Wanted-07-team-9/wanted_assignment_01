@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const HomeContainer = ({children}) => {
+const Layout = ({children}) => {
   return (
     <Container>
     {children}
@@ -15,4 +15,4 @@ const Container  = styled.div`
   background-color: #fbfbff;
 `
 
-export default HomeContainer
+export default Layout
