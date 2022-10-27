@@ -6,6 +6,7 @@ import { getTodoList, createTodo, updateTodo, deleteTodo } from '../api/todo';
 import { MdAddCircle } from 'react-icons/md';
 import styled from 'styled-components';
 import Pagination from '../utils/Pagination';
+import { validateTodo } from '../utils/todoValidation';
 
 function TodoListPage() {
   const [insertToggle, setInsertToggle] = useState(false);
@@ -26,7 +27,7 @@ function TodoListPage() {
   };
 
   const onInsertTodo = text => {
-    if (text === '') {
+    if (validateTodo) {
       return alert('할일을 입력해 주세요');
     } else {
       createTodo(text);
@@ -56,6 +57,9 @@ function TodoListPage() {
     }
   };
   const onUpdate = (id, todo, isCompleted) => {
+    if (validateTodo) {
+      return alert('수정할 할일을 입력해 주세요');
+    }
     updateTodo(id, todo, isCompleted);
   };
 
