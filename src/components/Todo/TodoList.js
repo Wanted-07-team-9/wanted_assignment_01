@@ -9,10 +9,12 @@ const TodoList = ({
   onChangeSelectedTodo,
   onUpdate,
   onRemove,
+  offset,
+  limit,
 }) => {
   return (
     <TodoListLayout>
-      {todoList?.map(todos => (
+      {todoList?.slice(offset, offset + limit).map(todos => (
         <TodoItem
           todos={todos}
           key={todos.id}

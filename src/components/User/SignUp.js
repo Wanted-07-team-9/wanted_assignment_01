@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUp } from '../../utils/auth';
-import { emailCheck, passwordCheck } from '../../utils/auth';
+import { signUp } from '../../api/auth';
+import { emailCheck, passwordCheck } from '../../api/auth';
 import styled from 'styled-components';
 
 function SignUp() {

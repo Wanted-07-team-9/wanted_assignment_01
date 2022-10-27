@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Template from '../components/Todo/Template';
 import TodoList from '../components/Todo/TodoList';
 import TodoInsert from '../components/Todo/TodoInsert';
-import { getTodoList, createTodo, updateTodo, deleteTodo } from '../utils/todo';
+import { getTodoList, createTodo, updateTodo, deleteTodo } from '../api/todo';
 import { MdAddCircle } from 'react-icons/md';
 import styled from 'styled-components';
+import Pagination from '../utils/Pagination';
 
 function TodoListPage() {
   const [insertToggle, setInsertToggle] = useState(false);
   const [todoList, setTodoList] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState(null);
+
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   const token = localStorage.getItem('accessToken');
 
@@ -51,7 +56,6 @@ function TodoListPage() {
     }
   };
   const onUpdate = (id, todo, isCompleted) => {
-    // console.log(id, todo, isCompleted);
     updateTodo(id, todo, isCompleted);
   };
 
@@ -59,6 +63,8 @@ function TodoListPage() {
     <div>
       <Template todoLength={todoList.length}>
         <TodoList
+          offset={offset}
+          limit={limit}
           todoList={todoList}
           onCheckToggle={onCheckToggle}
           onInsertToggle={onInsertToggle}
@@ -78,6 +84,15 @@ function TodoListPage() {
             onUpdate={onUpdate}
           />
         )}
+        {todoList.length ? (
+          <Pagination
+            total={todoList.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+            setLimit={setLimit}
+          />
+        ) : null}
       </Template>
     </div>
   );
