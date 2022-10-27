@@ -1,3 +1,33 @@
+# 프리온보딩 9팀
+
+| <img src="https://avatars.githubusercontent.com/u/58911113?v=4" width="120" height="120" /> | <img src="https://avatars.githubusercontent.com/u/74575497?v=4" width="120" height="120" /> | <img src="https://avatars.githubusercontent.com/u/72599761?v=4" width="120" height="120"/> |
+| :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
+|                                           👑 권준                                           |                                           김경훈                                            |                                           김수정                                           |
+|                            [@jun-05](https://github.com/jun-05)                             |                          [@tirhande](https://github.com/tirhande)                           |                        [@crystal993](https://github.com/crystal993)                        |
+
+| <img src="https://avatars.githubusercontent.com/u/104307213?v=4" width="120" height="120"/> | <img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="120" height="120" /> | <img src="https://avatars.githubusercontent.com/u/77476348?v=4"  width="120" height="120" /> | <img src="https://avatars.githubusercontent.com/u/76990149?v=4" width="120" height="120"/> |
+| :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
+|                                           송슬기                                            |                                           오나래                                            |                                            이창훈                                            |                                           전이진                                           |
+|                          [@songseul](https://github.com/songseul)                           |                            [@NR0617](https://github.com/NR0617)                             |                 [@anotheranotherhoon](https://github.com/anotheranotherhoon)                 |                          [@pongdang](https://github.com/pongdang)                          |
+
+## 배포링크
+
+[✨ 배포링크](https://wanted-assignment-01.vercel.app)
+
+## 프로젝트의 실행 방법
+
+```
+git clone git@github.com:Wanted-07-team-9/wanted_assignment_01.git
+
+cd wanted-pre-onboarding-frontend
+
+npm install
+
+npm start
+
+open http://localhost:3000
+```
+
 ## commit msg 규칙
 
 ### 1. 커밋 유형 지정하기
@@ -18,23 +48,9 @@
 
 💡 ci : CI관련 설정 수정에 대한 커밋
 
-## 배포링크
+## Best Practice 선정 이유
 
-[✨ 배포링크](https://wanted-assignment-01.vercel.app)
-
-## 프로젝트의 실행 방법
-
-```
-git clone git@github.com:Wanted-07-team-9/wanted_assignment_01.git
-
-cd wanted-pre-onboarding-frontend
-
-npm install
-
-npm start
-
-open http://localhost:3000
-```
+[✨ 보러가기](https://github.com/Wanted-07-team-9/wanted_assignment_01/pull/21)
 
 ## 작업한 내용
 
@@ -209,7 +225,7 @@ export function withAuthGuard(type, Component) {
 - `useFetch` hook을 사용하여 목록을 가져오도록 했습니다.
 - 자세하나 내용은 작업한 내용의 `2. Suspense 를 이용한 선언적인 비동기 함수 처리의 로딩처리` 에서 확인할 수 있습니다.
 
-### 그외 기능(옵션)
+### 그 외 기능(옵션)
 
 - 에러 메시지를 모달창으로 확인할 수 있습니다.
 - 로그아웃 기능
