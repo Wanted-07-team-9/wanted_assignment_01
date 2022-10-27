@@ -2,11 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as authAPI from '../api/auth';
 import { client } from '../api/client';
-
-const setToken = jwt => {
-  localStorage.setItem('token', jwt);
-  client.defaults.headers.common.Authorization = `Bearer ${jwt}`;
-};
+import { setToken } from './../utils/token';
 
 const AuthContext = createContext();
 
