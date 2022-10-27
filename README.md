@@ -42,7 +42,7 @@ open http://localhost:3000
 
 **Context API**로 유저의 로그인 상태를 전역에서 관리할 수 있도록 하였고 상태에 따라 접근할 수 있는 라우터를 처리했습니다.
 
-- HoC로 작성된 함수에서 접근 대상에 따른 페이지의 타입(`member | guest`)을 명시하여 isLogin 상태와 비교합니다.
+- [HoC로 작성된 함수](https://github.com/pongdang/wanted_assignment_01/blob/3439ba076a1ab87862290abdf939b71dde646db6/src/util/withAuthGuard.js#L1-L21)에서 접근 대상에 따른 페이지의 타입(`member | guest`)을 명시하여 isLogin 상태와 비교합니다.
 - 로그인하지 않은 상태(`isLogin === false`)에서 member들만 접근할 수 있는 페이지(`/todo`)를 접근하려 한다면 로그인 페이지(`/`) 로 리다이렉트 시켜줍니다.
 - 로그인한 상태(`isLogin === true`)에서 guest들만 접근할 수 있는 페이지(`/`, `/signup`)을 접근하려 한자면 투두 페이지(`/todo`) 로 리다이렉트 시켜줍니다.
 
@@ -68,20 +68,20 @@ open http://localhost:3000
 
 form을 검증하는 역할을 한 곳에 위임하고자 `useFormField` hook을 만들었습니다.
 
-```
-  const {
-    value: password,
-    onChange: onChangePassword,
-    errorMessage: passwordErrorMessage,
-  } = useFormField({
-    validators: [
-      { ok: value => isEmptyValue(value), message: '비밀번호를 입력해주세요' },
-      {
-        ok: value => isValidPassword(value),
-        message: '비밀번호는 8자 이상이어야 합니다',
-      },
-    ],
-  });
+```js
+const {
+  value: password,
+  onChange: onChangePassword,
+  errorMessage: passwordErrorMessage,
+} = useFormField({
+  validators: [
+    { ok: value => isEmptyValue(value), message: '비밀번호를 입력해주세요' },
+    {
+      ok: value => isValidPassword(value),
+      message: '비밀번호는 8자 이상이어야 합니다',
+    },
+  ],
+});
 ```
 
 `validators` 배열 안에 value의 유효성을 검사하는 함수를 넣어, 그 함수의 결과에 따라 `errorMessage` 가 반환되도록 했습니다.
