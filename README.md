@@ -270,4 +270,44 @@ export default Button;
 
 - 위의 코드는 만능버튼을 구현한 것입니다.
 
+<br>
+<hr>
+<br>
+
 # 5. GlobalStyle 및 Theme 적용 
+
+- GlobalStyle
+```javascript
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+* {
+	box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+	background-color: #5D5FEF;
+  font-family: 'Nanum Gothic Coding', monospace;
+}
+body * {
+	background-color: transparent;
+	letter-spacing: -0.5px;
+}
+h1 {
+  font-family: 'Roboto', sans-serif;
+}
+a {
+	text-decoration: none;
+  color: inherit;
+}
+`;
+export default GlobalStyle;
+```
+
+<br>
+<hr>
+<br>
