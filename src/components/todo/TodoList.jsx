@@ -42,7 +42,7 @@ const TodoList = ({ setTodoList, todoList }) => {
         {todoList &&
           todoList.map(todo => {
             return (
-              <Fragment key={todo.id}>
+              <>
                 {todo && (
                   <Todo
                     todo={todo}
@@ -51,7 +51,7 @@ const TodoList = ({ setTodoList, todoList }) => {
                     onUpdateHandler={onUpdateHandler}
                   />
                 )}
-              </Fragment>
+              </>
             );
           })}
       </ItemList>
