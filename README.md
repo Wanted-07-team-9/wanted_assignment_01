@@ -150,5 +150,40 @@
 - 유효성 검사를 통과하지 못하면 회원가입 버튼이 비활성화 됩니다.
 - 유효성 검사를 통과하면 회원가입이 완료됐으므로 로그인 페이지로 이동합니다.
 
+<br>
+<hr>
+<br>
 
+# 2. 정규식 파일 분리 
+```javascript
+// 이메일 정규식 검사
+// @만 포함되면 true
+export const emailCheck = email => {
+  let regExp = /[@]/;
 
+  return email.trim() !== '' && email !== 'undefined' && regExp.test(email);
+};
+
+// 패스워드 정규식 검사
+// 6자 이상이면 true
+export const passwordCheck = password => {
+  let regExp = /.{8,}/;
+
+  return password.trim() !== '' && password !== 'undefined' && regExp.test(password);
+};
+```
+
+# 3. jwt토큰 값 로컬 스토리지에 저장 
+
+```javascript
+// Token 가져오기
+export const getJwtToken = tokenName => {
+  return localStorage.getItem(tokenName);
+};
+
+// Token 저장
+export const setJwtToken = (tokenName, tokenData) => {
+  localStorage.setItem(tokenName, tokenData);
+  return 0;
+};
+```
