@@ -52,7 +52,7 @@ export const passwordCheck = password => {
 
 ```
 
-### 유효성 함수를 가져와 인풋의 value 검사
+#### 유효성 함수를 가져와 인풋의 value 검사
 
 ```
   const Check = () => {
@@ -75,7 +75,7 @@ export const passwordCheck = password => {
   };
 ```
 
-### 버튼 활성화
+#### 버튼 활성화
 
 ```
 {check ? (
@@ -98,7 +98,7 @@ export const passwordCheck = password => {
 
 ```
 
-### 리다이렉트 함수를 생성
+#### 리다이렉트 함수를 생성
 
 ```
 const RedRedirect = ({ to }) => <Navigate replace to={to} />;
