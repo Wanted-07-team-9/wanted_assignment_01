@@ -48,9 +48,11 @@ open http://localhost:3000
 
 💡 ci : CI관련 설정 수정에 대한 커밋
 
-## Best Practice 선정 이유
+## Best Practice
 
-[✨ 보러가기](https://github.com/Wanted-07-team-9/wanted_assignment_01/pull/21)
+[✨ 선정 기준](https://aeolian-mango-f23.notion.site/Assignment-18f08fd240c84e658b3e071ab2aeb1db)
+
+[✨ 선정 이유](https://github.com/Wanted-07-team-9/wanted_assignment_01/pull/21)
 
 ## 작업한 내용
 
