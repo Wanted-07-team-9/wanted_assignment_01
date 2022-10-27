@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../../api/auth';
 import { emailCheck, passwordCheck } from '../../utils/authValidation';
+
 import styled from 'styled-components';
 
 function SignUp() {

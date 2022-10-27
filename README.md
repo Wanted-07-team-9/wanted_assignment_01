@@ -1,4 +1,4 @@
-## Best Practice
+# Best Practice
 
 ### API 폴더와 파일 생성
 
