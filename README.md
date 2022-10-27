@@ -1,5 +1,7 @@
 # Best Practice
 
+# [💙배포링크💙](https://sparkling-taiyaki-9de7c5.netlify.app/)
+
 ### API 폴더와 파일 생성
 
 ```
