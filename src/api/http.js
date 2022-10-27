@@ -3,6 +3,7 @@ import axios from 'axios';
 export const instance = axios.create({
   baseURL: `https://pre-onboarding-selection-task.shop`,
 });
+
 instance.interceptors.request.use(
   function (config) {
     const token = localStorage.getItem('accessToken');
