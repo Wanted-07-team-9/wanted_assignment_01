@@ -43,6 +43,8 @@ export const passwordCheck = password => {
 
 ```
 
+- 정규식 표현으로 유효성 검사 함수를 이메일과 패스워드 두가지를 생성 하였습니다.
+
 ---
 
 ### 유효성 검사 / 버튼 활성화
@@ -58,7 +60,7 @@ export const passwordCheck = password => {
 
 ```
   const Check = () => {
-    if (email === '' || password === '') {
+    if (email === '' &&  password === '') {
       setErrMessage('양식을 모두 입력해주세요');
       return setCheck(false);
     }
@@ -77,6 +79,8 @@ export const passwordCheck = password => {
   };
 ```
 
+- 회원가입 유효성 체크에 정규표현식 함수를 임포트 하여 이메일과 패스워드 인풋 value를 검사를 진행 합니다.
+
 #### 버튼 활성화
 
 ```
@@ -88,6 +92,8 @@ export const passwordCheck = password => {
           </button>
         )}
 ```
+
+- 이전 회원가입 버튼 활성화는 버튼의 disabled를 사용 했다면 유효성 검사의 조건에 따른 버튼 컴포넌트 렌더링으로 수정 하여 UI 적인 부분을 개선 했습니다.
 
 ---
 
@@ -119,16 +125,9 @@ export const withAuthGuard = (type, Component) => {
 };
 ```
 
+- 개선하기전 Route컴포넌트 element에 토큰 여부의 조건부 렌더링으로 작성 했는데 토큰 값과 멤버인지 게스트인지에 따른 리다이렉트 함수를 만들었습니다
+
 ---
-
-### 투두 리스트
-
-```
-
-📂 Pages
- ┗ 📜 TodoListPage.js
-
-```
 
 #### todo 인풋 유효성 검사
 
@@ -145,6 +144,8 @@ export const withAuthGuard = (type, Component) => {
 };
 
 ```
+
+- todo 입력 input에 유효성 검사 함수를 따로 만들어 사용 하였습니다.
 
 #### todo 추가, todo 수정 빈칸 입력시 제출 못함
 
@@ -172,6 +173,8 @@ export const withAuthGuard = (type, Component) => {
   };
 ```
 
+- 수정, 추가시에 유효성 검사를 통가에 따른 함수의 실행과 에러가 활성화 되도록 개선 하였습니다.
+
 ---
 
 ### pagenation 구현
@@ -198,3 +201,5 @@ export const withAuthGuard = (type, Component) => {
         </PageClick>
       </PageNav>
 ```
+
+- 10개 씩 하나의 페이지로 보이도록 페이지 네이션을 구현 하였습니댜.
