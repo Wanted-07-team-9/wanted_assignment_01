@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import InputBox from './InputBox';
 import { validatePswReg } from '../../utils/validation';
@@ -11,19 +11,23 @@ const SignIn = ({ signIn, signUp }) => {
     passwordErr: false,
   });
 
-  const validateInputForm = useCallback(() => {
-    const emailValidation = !validateEmailReg(userForm.email);
-    const passwordValidation = !validatePswReg(userForm.password);
-
+  useEffect(() => {
+    const [emailValidation, passwordValidation] = validateInputForm(
+      userForm.email,
+      userForm.password
+    );
     setFormValError({
-      ...formValError,
       emailErr: emailValidation,
       passwordErr: passwordValidation,
     });
-  }, [formValError, userForm.email, userForm.password]);
+  }, [userForm.email, userForm.password]);
 
+  const validateInputForm = (email, password) => {
+    const emailValidation = !validateEmailReg(email);
+    const passwordValidation = !validatePswReg(password);
+    return [emailValidation, passwordValidation];
+  };
   const onInfoChange = e => {
-    validateInputForm();
     setUserForm({ ...userForm, [e.target.type]: e.target.value });
   };
 
@@ -33,22 +37,23 @@ const SignIn = ({ signIn, signUp }) => {
       _err = true;
       return _err;
     }
+
     return _err;
   }, [formValError.emailErr, formValError.passwordErr]);
 
-  const onSignIn = () => {
+  const onClickSignIn = () => {
     const errState = checkFormErr();
     if (errState) {
-      alert('form error');
+      alert('formValue error');
       return;
     }
     signIn(userForm);
   };
 
-  const onSignUp = () => {
+  const onClickSignUp = () => {
     const errState = checkFormErr();
     if (errState) {
-      alert('form error');
+      alert('formValue error');
       return;
     }
     signUp(userForm);
@@ -61,11 +66,17 @@ const SignIn = ({ signIn, signUp }) => {
           <div className="text-3xl font-bold">Sign In</div>
           <div className="mt-10">
             <InputBox type="email" placeholder="Email" onChange={onInfoChange} />
+            {formValError.emailErr && userForm.email.length > 6 && (
+              <div className="mb-2 text-red-400 text-sm"> 이메일이 올바르지 않습니다.</div>
+            )}
             <InputBox type="password" placeholder="password" onChange={onInfoChange} />
+            {formValError.passwordErr && userForm.password.length > 1 && (
+              <div className="mb-2 text-red-400 text-sm"> 패스워드가 올바르지 않습니다</div>
+            )}
             <button
               className="w-full bg-slate-100 rounded-md border-2 hover:border-black hover:border-collapse disabled:cursor-not-allowed disabled:text-red-500"
               disabled={checkFormErr()}
-              onClick={onSignIn}
+              onClick={onClickSignIn}
             >
               로그인
             </button>
@@ -73,7 +84,7 @@ const SignIn = ({ signIn, signUp }) => {
             <button
               className="w-full bg-slate-100 rounded-md border-2 hover:border-black hover:border-collapse disabled:cursor-not-allowed disabled:text-red-500"
               disabled={checkFormErr()}
-              onClick={onSignUp}
+              onClick={onClickSignUp}
             >
               회원가입
             </button>
