@@ -1,9 +1,15 @@
 import axiosInstance from '../utils/axiosInstance';
+import { getToken } from '../utils/localStorage';
 
-export const createTodo = async todo => {
+const token = getToken()
+export const createTodo = async(todo)=> {
   try {
     const response = await axiosInstance.post('/todos', {
       todo,
+    },{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
     });
     return response.data;
   } catch (error) {
@@ -13,8 +19,12 @@ export const createTodo = async todo => {
 
 export const getTodos = async () => {
   try {
-    const response = await axiosInstance.get('/todos');
-    return response.data;
+    const {data} =     await axiosInstance.get('/todos',{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    })
+    return data
   } catch (error) {
     console.log(error);
     return [];
@@ -23,13 +33,16 @@ export const getTodos = async () => {
 
 export const updateTodo = async (id, todo, isCompleted, userId) => {
   try {
-    const response = await axiosInstance.put(`todos/${id}`, {
+    await axiosInstance.put(`todos/${id}`, {
       id,
       todo,
       isCompleted,
       userId,
-    });
-    return response.data;
+    },{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    }).then((res)=>console.log(res))
   } catch (error) {
     console.log(error);
   }
@@ -37,7 +50,11 @@ export const updateTodo = async (id, todo, isCompleted, userId) => {
 
 export const deleteTodo = async id => {
   try {
-    const response = await axiosInstance.delete(`todos/${id}`);
+    await axiosInstance.delete(`todos/${id}`,{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    });
   } catch (error) {
     console.log(error);
   }
