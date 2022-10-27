@@ -11,3 +11,7 @@ export const passwordCheck = (password) => {
 export const rePasswordCheck = (password, rePassword) => {
   return(password === rePassword)
 }
+
+export const validateToDoInput = (toDoContent) => {
+  return toDoContent.replace(/ /g, "").length >= 1;
+}
