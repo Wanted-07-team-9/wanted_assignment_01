@@ -76,7 +76,7 @@
 ### 로그인
 ![로그인](https://user-images.githubusercontent.com/72599761/198223948-99c8aa24-606d-4efb-ba51-98bb6ddf5701.gif)
 
-```
+```javascript
  const [emailMsg, setEmailMsg] = useState('');
  const [pwMsg, setPwMsg] = useState('');
  const [emailMsgColor, setEmailMsgColor] = useState('');
@@ -111,7 +111,7 @@
   };
 ```
 
-```
+```javascript
  return (
     <Wrapper>
     ...
