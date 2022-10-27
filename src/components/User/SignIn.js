@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { signIn } from '../../utils/auth';
+import { signIn } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
