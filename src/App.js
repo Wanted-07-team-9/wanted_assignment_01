@@ -1,5 +1,13 @@
+import GlobalStyle from './styles/GlobalStyle';
+import { Reset } from 'styled-reset';
+
 function App() {
-  return <div className="App"></div>;
+  return (
+    <>
+      <Reset />
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;
