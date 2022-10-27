@@ -72,7 +72,7 @@ open http://localhost:3000
 - 로딩 중일 때는 Promise를 throw 하여 Suspense 에서 fallback 엘리먼트를 렌더링하도록 합니다.
 - useFetch 에서 invalidate 함수를 얻어서 특정 쿼리(fetchTodoList)를 다시 refetch 할 수 있습니다.
 
-### 3. ErrorBoundary 를 이용한 선언적인 에러 처리 (event 에러를 잡기위한 useEventErrorHandle 구현)
+### 3. ErrorBoundary 를 이용한 선언적인 에러 처리 (event 에러를 잡기위한 EventErrorHandler 구현)
 
 **ErrorBoundary**는 error가 발생했을 때 어떤 UI를 보여줄 것인지 설정할 수 있습니다.
 
