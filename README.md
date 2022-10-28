@@ -96,7 +96,7 @@ open http://localhost:3000
 - 로그인,로그아웃 화면에서 각 인풋의 errMsg를 노출하기 위하여, 정규식 파일을 분리하였습니다.  
 - 회원가입 및 로그인 버튼 클릭시 함수내부에서 다시한번 검증하여 실행되도록 하였습니다.  
 - 폼 값이 정규식 값을 통과하지 못할시 errMsg를 노출하도록 하였습니다.
-- 함수이름 및 변수이름을 조금 더 직관적이고 명확하게 보일 수 있도록 노력하였습니다. (ex: item => todoObj / data => todoData etc.. )
+- 함수이름 및 변수이름을 조금 더 직관적이고 명확하게 보일 수 있도록 노력하였습니다. (ex: item => todoObj / onSignIn => onClickSignIn / data => todoData etc.. )
 
 #### 추가적 옵션
 - 팀 단위로 일관된 ESlint, prettier와 husky를 사용한 자동화를 진행하였습니다.
@@ -106,5 +106,5 @@ open http://localhost:3000
 - 팀 resetCSS를 적용하기로 하였습니다. 하지만 제가 사용하는 tailwindCSS는 resetCSS를 적용할 수 없기때문에 적용하지 않았습니다. 
 
 #### Bug
-현재 제 로컬환경에서 npm이 실행은 되지만, husky 사용시 node 에러가 발생하여 임시적으로 husky 자동화 부분을 주석처리하였습니다.
+현재 제 로컬환경에서 npm이 실행은 되지만, husky 사용시 node 에러가 발생하여 임시적으로 husky 자동화 부분을 주석처리하였습니다.  
 대부분의 환경에서는 주석 부분을 빼고 실행하시면 husky가 제대로 실행 됩니다.
