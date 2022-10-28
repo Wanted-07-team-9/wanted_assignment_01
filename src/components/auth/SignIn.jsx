@@ -3,6 +3,9 @@ import { useCallback } from 'react';
 import InputBox from './InputBox';
 import { validatePswReg } from '../../utils/validation';
 import { validateEmailReg } from './../../utils/validation';
+import ContentsContainer from '../common/ContentContainer';
+import Button from './../common/Button';
+import tw from 'tailwind-styled-components';
 
 const SignIn = ({ signIn, signUp }) => {
   const [userForm, setUserForm] = useState({ email: '', password: '' });
@@ -60,39 +63,59 @@ const SignIn = ({ signIn, signUp }) => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-full">
-      <div className="flex justify-center items-center w-[720px] h-full bg-slate-500 min-h-screen">
-        <div className="flex justify-center items-center flex-col">
-          <div className="text-3xl font-bold">Sign In</div>
-          <div className="mt-10">
-            <InputBox type="email" placeholder="Email" onChange={onInfoChange} />
-            {formValError.emailErr && userForm.email.length > 6 && (
-              <div className="mb-2 text-red-400 text-sm"> 이메일이 올바르지 않습니다.</div>
-            )}
-            <InputBox type="password" placeholder="password" onChange={onInfoChange} />
-            {formValError.passwordErr && userForm.password.length > 1 && (
-              <div className="mb-2 text-red-400 text-sm"> 패스워드가 올바르지 않습니다</div>
-            )}
-            <button
-              className="w-full bg-slate-100 rounded-md border-2 hover:border-black hover:border-collapse disabled:cursor-not-allowed disabled:text-red-500"
-              disabled={checkFormErr()}
-              onClick={onClickSignIn}
-            >
-              로그인
-            </button>
-            <div className="text-center my-1"> or </div>
-            <button
-              className="w-full bg-slate-100 rounded-md border-2 hover:border-black hover:border-collapse disabled:cursor-not-allowed disabled:text-red-500"
-              disabled={checkFormErr()}
-              onClick={onClickSignUp}
-            >
-              회원가입
-            </button>
-          </div>
+    <ContentsContainer>
+      <Container>
+        <TitleBlokc>Sign In</TitleBlokc>
+        <div className="mt-10">
+          <InputBox type="email" placeholder="Email" onChange={onInfoChange} />
+          {formValError.emailErr && userForm.email.length > 6 && (
+            <ErrorBlock> 이메일이 올바르지 않습니다.</ErrorBlock>
+          )}
+          <InputBox type="password" placeholder="password" onChange={onInfoChange} />
+          {formValError.passwordErr && userForm.password.length > 1 && (
+            <ErrorBlock> 패스워드가 올바르지 않습니다</ErrorBlock>
+          )}
+          <Button
+            $fullWidth
+            $disabled
+            className="h-8 text-center bg-slate-100 hover:border-black hover:border-collapse "
+            disabled={checkFormErr()}
+            onClick={onClickSignIn}
+          >
+            로그인
+          </Button>
+          <div className="text-center my-1"> or </div>
+          <Button
+            $fullWidth
+            $disabled
+            className="h-8 bg-slate-100 hover:border-black hover:border-collapse"
+            disabled={checkFormErr()}
+            onClick={onClickSignUp}
+          >
+            회원가입
+          </Button>
         </div>
-      </div>
-    </div>
+      </Container>
+    </ContentsContainer>
   );
 };
+
+const Container = tw.div`
+flex 
+justify-center 
+items-center 
+flex-col
+`;
+
+const TitleBlokc = tw.div`
+text-3xl 
+font-bold
+`;
+
+const ErrorBlock = tw.div`
+mb-2 
+text-red-400 
+text-sm
+`;
 
 export default SignIn;

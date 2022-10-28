@@ -47,8 +47,6 @@ const TodoContainer = () => {
     }
   };
 
-  if (!authState) return;
-
   return (
     <TodoList
       todos={todos}

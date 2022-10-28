@@ -5,7 +5,6 @@ import { useTempLogin } from './hooks/useTempLogin';
 
 function App() {
   useTempLogin();
-
   return (
     <Routes>
       <Route path="/" exact={true} element={<MainPage />} />

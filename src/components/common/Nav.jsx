@@ -1,27 +1,39 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
+import tw from 'tailwind-styled-components';
+import Button from './Button';
 
 const Nav = () => {
   const { authState, signOut } = useAuth();
 
   return (
-    <div className="absolute w-screen h-14 bg-slate-700 border-b-2 border-b-slate-400 ">
-      <div className="flex h-full items-center justify-end">
+    <NavWrapper>
+      <NavConatiner>
         {authState ? (
-          <div
-            className="h-10 w-20 bg-slate-300 text-center py-[8px] rounded-lg border-white border-1 mr-10 hover:cursor-pointer"
-            onClick={signOut}
-          >
+          <Button className="bg-slate-300 border-black mr-10" onClick={signOut}>
             sign out
-          </div>
+          </Button>
         ) : (
-          <div className="h-10 w-20 bg-slate-300 text-center py-[8px] rounded-lg border-black border-1 mr-10 hover:cursor-pointer">
-            sign In
-          </div>
+          <Button className="bg-slate-300 border-black mr-10 ">sign In</Button>
         )}
-      </div>
-    </div>
+      </NavConatiner>
+    </NavWrapper>
   );
 };
+
+const NavWrapper = tw.div`
+absolute 
+w-screen h-14
+bg-slate-700
+border-b-2
+border-b-slate-400
+`;
+
+const NavConatiner = tw.div`
+flex 
+h-full 
+items-center 
+justify-end
+`;
 
 export default Nav;

@@ -1,14 +1,14 @@
 import React from 'react';
-import BaseBody from '../components/common/BaseBody';
+import Background from '../components/common/Background';
 import Nav from '../components/common/Nav';
 import MainContainer from '../container/MainContainer';
 
 const MainPage = () => {
   return (
-    <BaseBody>
+    <Background>
       <Nav />
       <MainContainer />
-    </BaseBody>
+    </Background>
   );
 };
 
