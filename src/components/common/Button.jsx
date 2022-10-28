@@ -1,12 +1,8 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-const Button = ({ children, className, $fullWidth = false, disabled }) => {
-  return (
-    <ButtonComponent className={className} $fullWidth={$fullWidth} disabled={disabled}>
-      {children}
-    </ButtonComponent>
-  );
+const Button = props => {
+  return <ButtonComponent {...props}></ButtonComponent>;
 };
 
 //기본 설정만 되어있는 컴포넌트, 설정을 추가,변경 하려한다면 클래스네임에 덮어씌워줄수있습니다.

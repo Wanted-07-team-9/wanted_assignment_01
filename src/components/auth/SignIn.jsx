@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCallback } from 'react';
-import InputBox from './InputBox';
+import InputBox from '../common/InputBox';
 import { validatePswReg } from '../../utils/validation';
 import { validateEmailReg } from './../../utils/validation';
 import ContentsContainer from '../common/ContentContainer';
@@ -30,7 +30,7 @@ const SignIn = ({ signIn, signUp }) => {
     const passwordValidation = !validatePswReg(password);
     return [emailValidation, passwordValidation];
   };
-  const onInfoChange = e => {
+  const onChangeInfo = e => {
     setUserForm({ ...userForm, [e.target.type]: e.target.value });
   };
 
@@ -67,11 +67,11 @@ const SignIn = ({ signIn, signUp }) => {
       <Container>
         <TitleBlokc>Sign In</TitleBlokc>
         <div className="mt-10">
-          <InputBox type="email" placeholder="Email" onChange={onInfoChange} />
-          {formValError.emailErr && userForm.email.length > 6 && (
+          <InputBox type="email" placeholder="Email" onChange={onChangeInfo} />
+          {formValError.emailErr && userForm.email.length > 1 && (
             <ErrorBlock> 이메일이 올바르지 않습니다.</ErrorBlock>
           )}
-          <InputBox type="password" placeholder="password" onChange={onInfoChange} />
+          <InputBox type="password" placeholder="password" onChange={onChangeInfo} />
           {formValError.passwordErr && userForm.password.length > 1 && (
             <ErrorBlock> 패스워드가 올바르지 않습니다</ErrorBlock>
           )}
